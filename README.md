@@ -2,8 +2,9 @@ When using Linkedin API for the first time in a production server, you may get C
 
 
 ```shell
-python3 -m pip install requirements.txt
-python3 linkedin.py <your_email> <your_password>
+Create .env.dev and set FIXIE_URL, LINKEDIN_EMAIL, and LINKEDIN_PASSWORD
+python3 -m pip install -r requirements.txt
+python3 linkedin.py
 
 # Go to your inbox to get the PIN code and enter it if asked
 ```

@@ -1,13 +1,19 @@
 import sys
+import os
 import requests
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 
 SEED_URL = 'https://www.linkedin.com/uas/login'
 LOGIN_URL = 'https://www.linkedin.com/checkpoint/lg/login-submit'
 VERIFY_URL = 'https://www.linkedin.com/checkpoint/challenge/verify'
 
-session = requests.Session()
 
+load_dotenv('.env.dev')
+
+proxies = {'http': os.environ.get("FIXIE_URL", "")}
+session = requests.Session()
+session.proxies.update(proxies)
 
 def login(email, password):
     session.get(SEED_URL)
@@ -43,6 +49,6 @@ def verify_pin(soup):
 
 
 if __name__ == '__main__':
-    email = sys.argv[1]
-    password = sys.argv[2]
+    email = os.environ.get("LINKEDIN_EMAIL", "")
+    password = os.environ.get("LINKEDIN_PASSWORD", "")
     login(email, password)
